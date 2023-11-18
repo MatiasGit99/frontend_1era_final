@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend_1era_final/administracion_productos/pantalla_principal.dart';
+import 'package:frontend_1era_final/clientes/pantalla_principal.dart';
 // import 'package:frontend_1era_final/reserva_turnos/pantalla_principal.dart';
 import 'administracion_categorias/pantalla_principal.dart';
 // import 'pacientes_doctores/pantalla_principal.dart';
@@ -62,10 +63,10 @@ class _VentasListScreenState extends State<VentasListScreen> {
             ElevatedButton(
               onPressed: () {
                 Navigator.of(context).push(MaterialPageRoute(builder: (_) {
-                  return ProductoScreen(); // Navegar a la nueva pantalla
+                  return AdministracionClientesScreen(); // Navegar a la nueva pantalla
                 })); // Acción para 'Reserva de turnos'
               },
-              child: Text('Reserva de turnos'),
+              child: Text('Administracion de clientes'),
             ),
             ElevatedButton(
               onPressed: () {
