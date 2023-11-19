@@ -58,7 +58,7 @@ class _AdministracionClientesScreenState
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Administración de Pacientes y Doctores'),
+        title: Text('Administración de Clientes'),
       ),
       body: SingleChildScrollView(
         child: Column(

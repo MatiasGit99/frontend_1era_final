@@ -28,7 +28,9 @@ class ProductoDatabaseProvider {
             codigo TEXT,
             nombre_producto TEXT,
             idCategoria INTEGER,
-            categoria_nombre TEXT
+            categoria_nombre TEXT,
+            precioVenta REAL
+
           )
         ''');
       },

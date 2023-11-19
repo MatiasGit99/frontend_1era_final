@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:frontend_1era_final/administracion_productos/pantalla_principal.dart';
-import 'package:frontend_1era_final/clientes/pantalla_principal.dart';
-// import 'package:frontend_1era_final/reserva_turnos/pantalla_principal.dart';
+import '/administracion_productos/pantalla_principal.dart';
+import '/clientes/pantalla_principal.dart';
 import 'administracion_categorias/pantalla_principal.dart';
-// import 'pacientes_doctores/pantalla_principal.dart';
-// import 'package:frontend_2da_parcial/ficha_clinica/pantalla_principal.dart';
+import 'venta/pantalla_principal.dart';
+
 
 
 void main() => runApp(MyApp());
@@ -70,12 +69,11 @@ class _VentasListScreenState extends State<VentasListScreen> {
             ),
             ElevatedButton(
               onPressed: () {
-                // Navigator.of(context).push(MaterialPageRoute(builder: (_) {
-                //   return FichaClinicaScreen(); // Navegar a la nueva pantalla
-                // })); // Acción para 'Reserva de turnos'
-                // Acción para 'Ficha clínica'
+                Navigator.of(context).push(MaterialPageRoute(builder: (_) {
+                  return VentaScreen(); // Navegar a la nueva pantalla
+                })); // Acción para 'Reserva de turnos'
               },
-              child: Text('Ficha clínica'),
+              child: Text('Ventas'),
             ),
           ],
         ),

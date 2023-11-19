@@ -71,15 +71,17 @@ class _ProductoScreenState extends State<ProductoScreen> {
                   title: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('Código: ${Producto.codigo}'),
+                      Text('Nombre: ${Producto.nombre_producto}'),
                     ],
                   ),
                   subtitle: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('Nombre: ${Producto.nombre_producto}'),
+                      Text('Código: ${Producto.codigo}'),
                       Text(
                           'Categoría: ${Producto.categoria_nombre}'),
+                          Text(
+                          'Precio: ${Producto.precioVenta}'),
                     ],
                   ),
                   trailing: Row(
