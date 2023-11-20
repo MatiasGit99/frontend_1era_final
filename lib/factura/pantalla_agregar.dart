@@ -64,63 +64,6 @@ class _AgregarFacturaFormState extends State<AgregarFacturaForm> {
     });
   }
 
-// void exportToPDF(int idVenta) async {
-//   final pdf = pw.Document();
-//   //obtener la venta
-//   //obtner los detalles de la venta
-
-//   // Agrega un título
-//   pdf.addPage(
-//     pw.Page(
-//       build: (context) {
-//         return pw.Center(
-//           child: pw.Text('Factura', style: pw.TextStyle(fontSize: 24)),
-//         );
-//       },
-//     ),
-//   );
-
-//   // Agrega tus datos
-//   for (final categoria in data) {
-//     pdf.addPage(
-//       pw.Page(
-//         build: (context) {
-//           return pw.Column(
-//             children: [
-//               pw.Text('ID: ${categoria.idCategoria}'),
-//               pw.Text('Descripción: ${categoria.descripcion}'),
-//               pw.Divider(),
-//             ],
-//           );
-//         },
-//       ),
-//     );
-//   }
-
-//   // Guarda el archivo PDF en el directorio de documentos
-//   final directory = await getApplicationDocumentsDirectory();
-//   // final filePath = '${directory.path}/categorias.pdf';
-//   final fileName = 'categorias.pdf';
-
-//   final downloadsDirectory = '/storage/emulated/0/Download';
-//   final filePath = '$downloadsDirectory/$fileName';
-
-//   final file = File(filePath);
-//   print(filePath);
-
-//   // Espera a que el Future se complete y obtén los datos del archivo PDF
-//   final pdfData = await pdf.save();
-
-//   if (pdfData != null) {
-//     // Convierte los datos del archivo PDF en una lista de enteros
-//     final pdfBytes = pdfData.buffer.asUint8List();
-
-//     // Escribe los datos en el archivo
-//     await file.writeAsBytes(pdfBytes);
-//   } else {
-//     print('Error al exportar a PDF'); // Manejo de errores
-//   }
-// }
 
   void exportToPDF(int idVenta) async {
     //obtener la venta
@@ -133,56 +76,58 @@ class _AgregarFacturaFormState extends State<AgregarFacturaForm> {
         VentaDatabaseProvider(); // Crear una instancia de VentaDatabaseProvider
     final ventaValor = await ventaProvider.getVenta(
         idVenta); // Llamar al método getVenta usando la instancia creada
-
-    pdf.addPage(
-      pw.Page(
-        build: (context) {
-          return pw.Center(
-            child: pw.Column(
-              mainAxisAlignment: pw.MainAxisAlignment.center,
-              crossAxisAlignment: pw.CrossAxisAlignment.center,
-              children: [
-                pw.Text('Número de Factura: ${ventaValor!.numeroFactura}'),
-                pw.Text('Fecha: ${ventaValor.fecha.toString()}'),
-                pw.Text(
-                    'Precio de Venta: \$${ventaValor.precioVenta.toString()}'),
-              ],
-            ),
-          );
-        },
-      ),
-    );
-
-    final venta_detalle_Provider =
+         final venta_detalle_Provider =
         DetalleVentaDatabaseProvider(); // Crear una instancia de VentaDatabaseProvider
     final venta_detalleValor =
         await venta_detalle_Provider.getDetalleVentasByIdVenta(
             idVenta); // Llamar al método getVenta usando la instancia creada
 
-    for (final detalle in venta_detalleValor) {
-      pdf.addPage(
-        pw.Page(
-          build: (context) {
-            return pw.Column(
+pdf.addPage(
+  pw.Page(
+    build: (context) {
+      return pw.Column(
+        crossAxisAlignment: pw.CrossAxisAlignment.start,
+        children: [
+          pw.Container(
+            margin: pw.EdgeInsets.only(top: 20),
+            child: pw.Text(
+              'Factura',
+              style: pw.TextStyle(fontSize: 24),
+              textAlign: pw.TextAlign.center,
+            ),
+          ),
+          pw.Text('Número de Factura: ${ventaValor!.numeroFactura}'),
+          pw.Text('Fecha: ${ventaValor.fecha.toString()}'),
+          pw.Text('Cliente: ${ventaValor.email}'),
+          pw.Text(
+            'Precio de Venta: \$${ventaValor.precioVenta.toString()}',
+          ),
+          // Aquí agregamos los detalles de la venta
+          for (final detalle in venta_detalleValor)
+            pw.Column(
+              crossAxisAlignment: pw.CrossAxisAlignment.start,
               children: [
                 pw.Text('Producto: ${detalle.nombre_producto}'),
                 pw.Text('Cantidad: ${detalle.cantidad}'),
                 pw.Text('Precio del producto: ${detalle.precioProducto}'),
                 pw.Divider(),
               ],
-            );
-          },
-        ),
+            ),
+        ],
       );
-    }
+    },
+  ),
+);
+
+
 
     final directory = await getTemporaryDirectory();
-    final path = '${directory.path}/hola.pdf';
+    final path = '${directory.path}/factura.pdf';
     final file = await File(path).writeAsBytes(await pdf.save());
-    sendMail(file);
+    sendMail(file, ventaValor!.email);
   }
 
-  void sendMail(File file) async {
+  void sendMail(File file, String email) async {
     String username =
         'sanchezmatias968@gmail.com'; // Coloca tu dirección de Gmail
     String password = 'ofey hwuy okpk sbzq'; // Coloca tu contraseña de Gmail
@@ -190,9 +135,10 @@ class _AgregarFacturaFormState extends State<AgregarFacturaForm> {
     final smtpServer = gmail(username, password);
 
     final message = Message()
+  
       ..from = Address(username)
-      ..recipients.add('sanchezmatias9680@gmail.com') // Correo del destinatario
-      ..subject = 'PDF Attachment'
+      ..recipients.add(email) // Correo del destinatario
+      ..subject = 'Archivo PDF Adjunto'
       ..text = 'Factura generada.'
       ..attachments.add(FileAttachment(file));
 

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontend_1era_final/detalle_venta/pantalla_editar.dart';
 import '/detalle_venta/model.dart';
 import '/detalle_venta/actions.dart';
 import '/detalle_venta/pantalla_agregar.dart';
@@ -109,7 +110,23 @@ class _DetalleVentaScreenState extends State<DetalleVentaScreen> {
                       IconButton(
                         icon: Icon(Icons.edit),
                         onPressed: () {
-                          // Implement logic for editing the DetalleVenta
+                          // Obtén la categoría que deseas editar, puedes hacerlo a través de una consulta a la base de datos o como lo necesites.
+                          final detalle_ventaAEditar = DetalleVenta(
+                            idDetalleVenta: detalleVenta
+                                .idDetalleVenta, // asigna el ID de la categoría que deseas editar,
+                            idVenta: detalleVenta.idVenta,
+                            cantidad: detalleVenta.cantidad,
+                            idProducto: detalleVenta.idProducto,
+                            nombre_producto: detalleVenta.nombre_producto,
+                            precioProducto: detalleVenta.precioProducto,
+                          );
+
+                          Navigator.of(context)
+                              .push(MaterialPageRoute(builder: (_) {
+                            return EditarDetalleVentaScreen(
+                                detalleVenta:
+                                    detalle_ventaAEditar); // Pasa la categoría a editar a la pantalla de edición
+                          }));
                         },
                       ),
                     ],

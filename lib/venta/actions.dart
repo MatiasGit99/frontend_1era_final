@@ -27,7 +27,9 @@ class VentaDatabaseProvider {
             idVenta INTEGER PRIMARY KEY AUTOINCREMENT,
             numeroFactura TEXT,
             fecha TEXT,
-            precioVenta REAL
+            precioVenta REAL,
+            idCliente INTEGER,
+            email TEXT
           )
         ''');
       },

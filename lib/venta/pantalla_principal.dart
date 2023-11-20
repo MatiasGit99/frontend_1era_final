@@ -4,6 +4,7 @@ import '/venta/actions.dart';
 import '/venta/model.dart';
 import '/venta/pantalla_agregar.dart';
 import '/venta/pantalla_principal.dart';
+import '/venta/pantalla_editar.dart';
 import '/detalle_venta/pantalla_principal.dart';
 import '/main.dart';
 
@@ -98,6 +99,27 @@ class _VentaScreenState extends State<VentaScreen> {
                           deleteVenta(venta.idVenta);
                         },
                       ),
+                       IconButton(
+                        icon: Icon(Icons.edit),
+                        onPressed: () {
+                          // Obtén la categoría que deseas editar, puedes hacerlo a través de una consulta a la base de datos o como lo necesites.
+                          final ventaAEditar = Venta(
+                            idVenta: venta.idVenta, // asigna el ID de la categoría que deseas editar,
+                            numeroFactura: venta.numeroFactura,
+                            fecha: venta.fecha,
+                            precioVenta: venta.precioVenta,
+                            idCliente: venta.idCliente,
+                            email: venta.email,
+                          );
+
+                          Navigator.of(context)
+                              .push(MaterialPageRoute(builder: (_) {
+                            return EditarVentaScreen(
+                                venta:
+                                    ventaAEditar); // Pasa la categoría a editar a la pantalla de edición
+                          }));
+                        },
+                      ),
                       TextButton(
                         onPressed: () {
                           Navigator.of(context)
@@ -105,7 +127,7 @@ class _VentaScreenState extends State<VentaScreen> {
                             return DetalleVentaScreen(venta.idVenta!);
                           }));
                         },
-                        child: Text('Detalle'),
+                        child: Text('Detalles'),
                       ),
                       TextButton(
                         onPressed: () {

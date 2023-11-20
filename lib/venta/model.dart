@@ -3,6 +3,8 @@ class Venta {
   String numeroFactura;
   DateTime fecha;
   double precioVenta; // Agrega el campo precioVenta
+  int? idCliente;
+  String email;
 
 
   Venta({
@@ -10,6 +12,8 @@ class Venta {
     required this.numeroFactura,
     required this.fecha,
     required this.precioVenta,
+    required this.idCliente,
+    required this.email,
 
   });
 
@@ -18,6 +22,9 @@ class Venta {
         numeroFactura: json['numeroFactura'],
         fecha: DateTime.parse(json['fecha']),
         precioVenta: json['precioVenta'] != null ? json['precioVenta'].toDouble() : 0.0, // Verifica y convierte el valor a double
+        idCliente: json['idCliente'],
+        email: json['email'],
+
       );
 
   Map<String, dynamic> toJson() => {
@@ -25,5 +32,8 @@ class Venta {
         'numeroFactura': numeroFactura,
         'fecha': fecha.toIso8601String(), // Convierte la fecha a String
         'precioVenta': precioVenta,
+        'idCliente': idCliente,
+        'email': email,
+
       };
 }

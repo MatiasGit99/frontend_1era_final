@@ -71,7 +71,7 @@ class _AgregarClienteFormState extends State<AgregarClienteForm> {
                   return AdministracionClientesScreen();
                 }));
               },
-              child: Text('Guardar Paciente o Doctor'),
+              child: Text('Guardar Cliente'),
             ),
           ],
         ),

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:frontend_1era_final/clientes/model.dart';
 import '/venta/model.dart';
 import '/venta/actions.dart';
 import '/venta/pantalla_principal.dart';
+import '/clientes/actions.dart';
 import 'package:intl/intl.dart';
 
 class AgregarVentaForm extends StatefulWidget {
@@ -13,7 +15,21 @@ class _AgregarVentaFormState extends State<AgregarVentaForm> {
   final TextEditingController numeroFacturaController = TextEditingController();
   final TextEditingController precioVentaController = TextEditingController();
   DateTime fechaSeleccionada = DateTime.now();
+  List<Cliente> listaClientes = [];
+  Cliente? clienteSeleccionado;
+    @override
+  void initState() {
+    super.initState();
+    cargarClientes();
+  }
 
+  Future<void> cargarClientes() async {
+    final clientes = await ClienteDatabaseProvider().getAllClientes();
+
+    setState(() {
+      listaClientes = clientes;
+    });
+  }
   // Agrega controladores u otros campos si es necesario para el resto de los detalles de la venta
   Future<void> _seleccionarFechaHasta(BuildContext context) async {
     final seleccionada = await showDatePicker(
@@ -53,9 +69,24 @@ class _AgregarVentaFormState extends State<AgregarVentaForm> {
               controller: numeroFacturaController,
               decoration: InputDecoration(labelText: 'Número de Factura'),
             ),
+             DropdownButtonFormField<Cliente>(
+              value: clienteSeleccionado,
+              onChanged: (Cliente? newValue) {
+                setState(() {
+                  clienteSeleccionado = newValue;
+                });
+              },
+              items: listaClientes.map((Cliente cliente) {
+                return DropdownMenuItem<Cliente>(
+                  value: cliente,
+                  child: Text('${cliente.nombre} ${cliente.apellido}'),
+                );
+              }).toList(),
+              decoration: InputDecoration(labelText: 'Cliente'),
+            ),
             Row(
               children: [
-                Text('Fecha Hasta: '),
+                Text('Fecha: '),
                 Text(DateFormat('dd/MM/yyyy').format(fechaSeleccionada)),
                 SizedBox(width: 20),
                 ElevatedButton(
@@ -73,6 +104,9 @@ class _AgregarVentaFormState extends State<AgregarVentaForm> {
                   numeroFactura: numeroFacturaController.text,
                   fecha: fechaSeleccionada,
                   precioVenta: 0.0,
+                  idCliente: clienteSeleccionado!.idPersona,
+                  email: clienteSeleccionado!.email,
+
                   // Asignación del precioVenta como double
                 );
 
