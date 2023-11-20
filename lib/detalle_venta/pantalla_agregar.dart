@@ -81,7 +81,7 @@ class _AgregarDetalleVentaFormState extends State<AgregarDetalleVentaForm> {
                       '${producto.nombre_producto} ${producto.precioVenta}'),
                 );
               }).toList(),
-              decoration: InputDecoration(labelText: 'Producto y precio'),
+              decoration: InputDecoration(labelText: 'Producto y precio Gs.'),
             ),
             // Puedes agregar más campos según los detalles de tu DetalleVenta
 

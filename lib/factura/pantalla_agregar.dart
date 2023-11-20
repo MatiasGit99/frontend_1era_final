@@ -82,7 +82,7 @@ class _AgregarFacturaFormState extends State<AgregarFacturaForm> {
         await venta_detalle_Provider.getDetalleVentasByIdVenta(
             idVenta); // Llamar al método getVenta usando la instancia creada
 
-pdf.addPage(
+  pdf.addPage(
   pw.Page(
     build: (context) {
       return pw.Column(
@@ -100,16 +100,16 @@ pdf.addPage(
           pw.Text('Fecha: ${ventaValor.fecha.toString()}'),
           pw.Text('Cliente: ${ventaValor.email}'),
           pw.Text(
-            'Precio de Venta: \$${ventaValor.precioVenta.toString()}',
+            'Total Gs.: \$${ventaValor.precioVenta.toString()}',
           ),
-          // Aquí agregamos los detalles de la venta
+          // Aquí agregar los detalles de la venta
           for (final detalle in venta_detalleValor)
             pw.Column(
               crossAxisAlignment: pw.CrossAxisAlignment.start,
               children: [
                 pw.Text('Producto: ${detalle.nombre_producto}'),
                 pw.Text('Cantidad: ${detalle.cantidad}'),
-                pw.Text('Precio del producto: ${detalle.precioProducto}'),
+                pw.Text('Precio del producto Gs.: ${detalle.precioProducto}'),
                 pw.Divider(),
               ],
             ),
@@ -118,7 +118,6 @@ pdf.addPage(
     },
   ),
 );
-
 
 
     final directory = await getTemporaryDirectory();

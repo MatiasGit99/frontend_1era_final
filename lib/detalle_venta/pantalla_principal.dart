@@ -95,7 +95,7 @@ class _DetalleVentaScreenState extends State<DetalleVentaScreen> {
                     children: [
                       Text('Cantidad: ${detalleVenta.cantidad}'),
                       Text(
-                          'Precio del Producto: ${detalleVenta.precioProducto}'),
+                          'Precio del Producto Gs.: ${detalleVenta.precioProducto}'),
                     ],
                   ),
                   trailing: Row(

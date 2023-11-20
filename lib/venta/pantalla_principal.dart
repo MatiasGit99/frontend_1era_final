@@ -87,7 +87,8 @@ class _VentaScreenState extends State<VentaScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       // Agrega aquí los otros detalles de la venta que deseas mostrar en la lista
-                      Text('Precio de Venta: ${venta.precioVenta}'),
+                      Text('Cliente: ${venta.email}'),
+                      Text('Total Gs.: ${venta.precioVenta}'),
                     ],
                   ),
                   trailing: Row(
