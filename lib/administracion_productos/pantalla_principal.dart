@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '/administracion_productos/actions.dart';
 import '/administracion_productos/model.dart';
 import '/administracion_productos/pantalla_agregar.dart';
+import '/main.dart';
 
 class ProductoScreen extends StatefulWidget {
 
@@ -45,6 +46,15 @@ class _ProductoScreenState extends State<ProductoScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Fichas Clínicas'),
+            leading: IconButton(
+          // Agrega el botón de retroceso aquí
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.of(context).push(MaterialPageRoute(builder: (_) {
+                  return VentasListScreen();
+                }));
+          },
+        ),
       ),
       body: SingleChildScrollView(
         child: Column(

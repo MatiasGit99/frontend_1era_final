@@ -35,6 +35,15 @@ class _AgregarVentaFormState extends State<AgregarVentaForm> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Agregar Venta'),
+        leading: IconButton(
+          // Agrega el botón de retroceso aquí
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.of(context).push(MaterialPageRoute(builder: (_) {
+              return VentaScreen();
+            }));
+          },
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),

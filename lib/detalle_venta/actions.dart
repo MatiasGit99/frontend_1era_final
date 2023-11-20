@@ -51,6 +51,18 @@ class DetalleVentaDatabaseProvider {
     });
   }
 
+Future<List<DetalleVenta>> getDetalleVentasByIdVenta(int idVenta) async {
+  final db = await database;
+  final List<Map<String, dynamic>> maps = await db.query(
+    'detalle_ventas',
+    where: 'idVenta = ?',
+    whereArgs: [idVenta], // Filtro por idVenta
+  );
+  return List.generate(maps.length, (index) {
+    return DetalleVenta.fromJson(maps[index]);
+  });
+}
+
 
 
   Future<void> updateDetalleVenta(DetalleVenta detalleVenta) async {

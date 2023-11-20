@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import '/detalle_venta/model.dart';
 import '/detalle_venta/actions.dart';
 import '/detalle_venta/pantalla_agregar.dart';
+import '/main.dart';
 
 class DetalleVentaScreen extends StatefulWidget {
-    late int idVenta; // Variable para almacenar idVenta
-    DetalleVentaScreen(this.idVenta); // Constructor para recibir idVenta
+  late int idVenta; // Variable para almacenar idVenta
+  DetalleVentaScreen(this.idVenta); // Constructor para recibir idVenta
 
   @override
   _DetalleVentaScreenState createState() => _DetalleVentaScreenState();
@@ -26,7 +27,10 @@ class _DetalleVentaScreenState extends State<DetalleVentaScreen> {
     final listaDetallesVenta =
         await DetalleVentaDatabaseProvider().getAllDetalleVentas();
     setState(() {
-      detallesVenta = listaDetallesVenta.where((detalle) => detalle.idVenta == idVenta).toList();;
+      detallesVenta = listaDetallesVenta
+          .where((detalle) => detalle.idVenta == idVenta)
+          .toList();
+      ;
     });
   }
 
@@ -47,6 +51,15 @@ class _DetalleVentaScreenState extends State<DetalleVentaScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Detalles de Venta'),
+        leading: IconButton(
+          // Agrega el botón de retroceso aquí
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.of(context).push(MaterialPageRoute(builder: (_) {
+              return VentasListScreen();
+            }));
+          },
+        ),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -72,14 +85,16 @@ class _DetalleVentaScreenState extends State<DetalleVentaScreen> {
                   title: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('Nombre del Producto: ${detalleVenta.nombre_producto}'),
+                      Text(
+                          'Nombre del Producto: ${detalleVenta.nombre_producto}'),
                     ],
                   ),
                   subtitle: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text('Cantidad: ${detalleVenta.cantidad}'),
-                      Text('Precio del Producto: ${detalleVenta.precioProducto}'),
+                      Text(
+                          'Precio del Producto: ${detalleVenta.precioProducto}'),
                     ],
                   ),
                   trailing: Row(

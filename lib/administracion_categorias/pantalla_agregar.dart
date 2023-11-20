@@ -16,6 +16,15 @@ class _AgregarCategoriaFormState extends State<AgregarCategoriaForm> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Agregar Categoría'),
+        leading: IconButton(
+          // Agrega el botón de retroceso aquí
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.of(context).push(MaterialPageRoute(builder: (_) {
+              return AdministracionCategoriasScreen();
+            }));
+          },
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),

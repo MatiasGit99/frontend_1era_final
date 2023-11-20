@@ -3,6 +3,7 @@ import '/clientes/model.dart';
 import '/clientes/actions.dart';
 import '/clientes/pantalla_agregar.dart';
 import '/clientes/pantalla_editar.dart';
+import '/main.dart';
 
 class AdministracionClientesScreen extends StatefulWidget {
   @override
@@ -59,6 +60,15 @@ class _AdministracionClientesScreenState
     return Scaffold(
       appBar: AppBar(
         title: Text('Administración de Clientes'),
+        leading: IconButton(
+          // Agrega el botón de retroceso aquí
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.of(context).push(MaterialPageRoute(builder: (_) {
+              return VentasListScreen();
+            }));
+          },
+        ),
       ),
       body: SingleChildScrollView(
         child: Column(

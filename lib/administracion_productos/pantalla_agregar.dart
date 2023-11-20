@@ -37,6 +37,15 @@ class _AgregarProductoFormState extends State<AgregarProductoForm> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Agregar Producto'),
+        leading: IconButton(
+          // Agrega el botón de retroceso aquí
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.of(context).push(MaterialPageRoute(builder: (_) {
+              return ProductoScreen();
+            }));
+          },
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),

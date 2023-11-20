@@ -48,6 +48,21 @@ class VentaDatabaseProvider {
     });
   }
 
+  Future<Venta?> getVenta(int idVenta) async {
+    final db = await database;
+    final List<Map<String, dynamic>> maps = await db.query(
+      'ventas',
+      where: 'idVenta = ?',
+      whereArgs: [idVenta],
+    );
+
+    if (maps.isEmpty) {
+      return null; // Si no se encuentra ninguna venta con ese idVenta
+    }
+
+    return Venta.fromJson(maps.first); // Retorna la venta encontrada
+  }
+
   Future<void> updateCost(int idVenta, double precio) async {
     final db = await database;
 

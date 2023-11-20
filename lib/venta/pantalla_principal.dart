@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:frontend_1era_final/factura/pantalla_principal.dart';
 import '/venta/actions.dart';
 import '/venta/model.dart';
 import '/venta/pantalla_agregar.dart';
 import '/venta/pantalla_principal.dart';
 import '/detalle_venta/pantalla_principal.dart';
+import '/main.dart';
 
 class VentaScreen extends StatefulWidget {
   @override
@@ -43,6 +45,15 @@ class _VentaScreenState extends State<VentaScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Ventas'),
+            leading: IconButton(
+          // Agrega el botón de retroceso aquí
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.of(context).push(MaterialPageRoute(builder: (_) {
+                  return VentasListScreen();
+                }));
+          },
+        ),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -95,6 +106,15 @@ class _VentaScreenState extends State<VentaScreen> {
                           }));
                         },
                         child: Text('Detalle'),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          Navigator.of(context)
+                              .push(MaterialPageRoute(builder: (_) {
+                            return FacturaScreen(venta.idVenta!);
+                          }));
+                        },
+                        child: Text('Factura'),
                       ),
                     ],
                   ),

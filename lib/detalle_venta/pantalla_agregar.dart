@@ -7,6 +7,7 @@ import '/detalle_venta/pantalla_principal.dart';
 import '/administracion_productos/actions.dart';
 import '/venta/actions.dart';
 import '/venta/pantalla_principal.dart';
+import '/main.dart';
 import 'package:intl/intl.dart';
 
 class AgregarDetalleVentaForm extends StatefulWidget {
@@ -47,6 +48,15 @@ class _AgregarDetalleVentaFormState extends State<AgregarDetalleVentaForm> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Agregar Detalle Venta'),
+            leading: IconButton(
+          // Agrega el botón de retroceso aquí
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.of(context).push(MaterialPageRoute(builder: (_) {
+                  return VentasListScreen();
+                }));
+          },
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),

@@ -20,6 +20,15 @@ class _AgregarClienteFormState extends State<AgregarClienteForm> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Agregar Cliente'),
+        leading: IconButton(
+          // Agrega el botón de retroceso aquí
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.of(context).push(MaterialPageRoute(builder: (_) {
+              return AdministracionClientesScreen();
+            }));
+          },
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
